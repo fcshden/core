@@ -653,6 +653,9 @@ void WorldSession::LogoutPlayer(bool Save)
         ///- Update cached data at logout
         sObjectMgr.UpdatePlayerCache(_player);
 
+        ///- No need to create any new maps
+        sMapMgr.CancelInstanceCreationForPlayer(_player);
+
         //Start Solocraft Function
         CharacterDatabase.PExecute("DELETE FROM custom_solocraft_character_stats WHERE GUID = %u", _player->GetGUIDLow());
         //End Solocraft Function
