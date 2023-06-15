@@ -680,6 +680,8 @@ Player::Player(WorldSession* session) : Unit(),
         i[PCT_MOD] = 1.0f;
     }
 
+    m_baseSpellPower = 0; //SOLOCRAFT MOD
+
     // Player summoning
     m_summon_expire = 0;
     m_summon_mapid = 0;
@@ -17226,6 +17228,7 @@ void Player::_SaveStats()
     stmt.addUInt32(GetUInt32Value(UNIT_FIELD_RANGED_ATTACK_POWER));
     stmt.addUInt32(GetUInt32Value(PLAYER_FIELD_MOD_DAMAGE_DONE_POS + 1));
     stmt.addUInt32(GetTotalAuraModifier(SPELL_AURA_MOD_HEALING_DONE));
+    stmt.addUInt32(GetBaseSpellPowerBonus()); //SOLOCRAFT MOD
 
     stmt.Execute();
 }

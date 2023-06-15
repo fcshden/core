@@ -14,6 +14,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+#include "Objects/Player.h"
 #include "SpellCaster.h"
 #include "DynamicObject.h"
 #include "GameObject.h"
@@ -1226,6 +1227,9 @@ float SpellCaster:: SpellBaseHealingBonusDone(SpellSchoolMask schoolMask)
         // Healing bonus of spirit, intellect and strength
         if (GetTypeId() == TYPEID_PLAYER)
         {
+            // Base value
+            AdvertisedBenefit += ((Player*)this)->GetBaseSpellPowerBonus(); //SOLOCRAFT MOD
+
             // Healing bonus from stats
             Unit::AuraList const& mHealingDoneOfStatPercent = pUnit->GetAurasByType(SPELL_AURA_MOD_SPELL_HEALING_OF_STAT_PERCENT);
             for (const auto i : mHealingDoneOfStatPercent)
@@ -1391,6 +1395,9 @@ int32 SpellCaster::SpellBaseDamageBonusDone(SpellSchoolMask schoolMask)
 
         if (GetTypeId() == TYPEID_PLAYER)
         {
+            // Base value
+            DoneAdvertisedBenefit += ((Player*)this)->GetBaseSpellPowerBonus(); //SOLOCRAFT MOD
+
             // Damage bonus from stats
             Unit::AuraList const& mDamageDoneOfStatPercent = pUnit->GetAurasByType(SPELL_AURA_MOD_SPELL_DAMAGE_OF_STAT_PERCENT);
             for (const auto i : mDamageDoneOfStatPercent)

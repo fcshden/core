@@ -21,7 +21,7 @@ jobs:
     
     steps:
     #git checkout
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: windows dependencies
       #Sets versions for ACE/TBB
@@ -89,7 +89,7 @@ jobs:
 
           7z a -tzip ${{env.ARCHIVE_FILENAME}} Release
     - name: Archive this artefact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
           name: snapshot-devbuild
           path: "${{github.workspace}}/bin/${{env.ARCHIVE_FILENAME}}"
@@ -132,13 +132,13 @@ jobs:
 
           7z a -tzip ${{env.ARCHIVE_FILENAME}} Release
     - name: Archive this artefact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
           name: snapshot-devbuild
           path: "${{github.workspace}}/bin/${{env.ARCHIVE_FILENAME}}"
 
     - name: Download artifact snapshot-Release
-      uses: actions/download-artifact@v1
+      uses: actions/download-artifact@v3
       with:
         name: snapshot-devbuild
         path: all_snapshots

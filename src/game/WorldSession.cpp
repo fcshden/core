@@ -717,6 +717,10 @@ void WorldSession::LogoutPlayer(bool Save)
         ///- No need to create any new maps
         sMapMgr.CancelInstanceCreationForPlayer(_player);
 
+        //Start Solocraft Function
+        CharacterDatabase.PExecute("DELETE FROM custom_solocraft_character_stats WHERE GUID = %u", _player->GetGUIDLow());
+        //End Solocraft Function
+
         ///- Remove the player from the world
         // the player may not be in the world when logging out
         // e.g if he got disconnected during a transfer to another map
