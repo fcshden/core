@@ -182,56 +182,6 @@ const ClientOffsets* GetClientOffets(uint32 build)
     return nullptr;
 }
 
-// returns ScanFlag mask for those builds which we have offsets
-ScanFlags GetScanFlagsByAvailableOffsets()
-{
-    uint32 result = None;
-
-    auto offset_count = sizeof(Offsets) / sizeof(Offsets[0]);
-
-    for (auto i = 0; i < offset_count; ++i)
-    {
-        switch (Offsets[i].Build)
-        {
-        case CLIENT_BUILD_1_2_4:
-            result |= WinBuild4222;
-            break;
-        case CLIENT_BUILD_1_3_1:
-            result |= WinBuild4297;
-            break;
-        case CLIENT_BUILD_1_4_2:
-            result |= WinBuild4375;
-            break;
-        case CLIENT_BUILD_1_5_1:
-            result |= WinBuild4449;
-            break;
-        case CLIENT_BUILD_1_6_1:
-            result |= WinBuild4544;
-            break;
-        case CLIENT_BUILD_1_7_1:
-            result |= WinBuild4695;
-            break;
-        case CLIENT_BUILD_1_8_4:
-            result |= WinBuild4878;
-            break;
-        case CLIENT_BUILD_1_9_4:
-            result |= WinBuild5086;
-            break;
-        case CLIENT_BUILD_1_10_2:
-            result |= WinBuild5302;
-            break;
-        case CLIENT_BUILD_1_11_2:
-            result |= WinBuild5464;
-            break;
-        case CLIENT_BUILD_1_12_1:
-            result |= WinBuild5875 | WinBuild6005 | WinBuild6141;
-            break;
-        }
-    }
-
-    return static_cast<ScanFlags>(result);
-}
-
 std::string ArchitectureString(uint16 arch)
 {
     switch (arch)
@@ -509,8 +459,6 @@ bool ValidateEndSceneHook(const std::vector<uint8> &code)
 
 void WardenWin::LoadScriptedScans()
 {
-    auto offset_flags = GetScanFlagsByAvailableOffsets();
-
     // sys info locate phase 2
     auto const wardenSysInfo2 = std::make_shared<WindowsScan>(
     // builder
@@ -565,7 +513,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(WIN_SYSTEM_INFO),
-        "Sysinfo locate", None);
+        "Sysinfo locate", ScanFlags::ModuleInitialized, 0, UINT16_MAX);
 
     // sys info locate phase 1
     auto const wardenSysInfo1 = std::make_shared<WindowsScan>(
@@ -605,7 +553,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(uint32),
-        "Intermediate sysinfo locate", None);
+        "Intermediate sysinfo locate", ScanFlags::ModuleInitialized, 0, UINT16_MAX);
 
     // find warden module
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
@@ -644,7 +592,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(uint32),
-        "Warden locate", InitialLogin|offset_flags));
+        "Warden locate", ScanFlags::ModuleInitialized | ScanFlags::InitialLogin, 0, UINT16_MAX));
 
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
     // builder
@@ -687,7 +635,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8),
-    sizeof(uint32), "CWorld::enables hack", offset_flags));
+    sizeof(uint32), "CWorld::enables hack", ScanFlags::ModuleInitialized, 0, UINT16_MAX));
 
     // read game time and last hardware action time together
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
@@ -752,7 +700,7 @@ void WardenWin::LoadScriptedScans()
         wardenWin->_lastTimeCheckServer = WorldTimer::getMSTime();
 
         return false;
-    }, 11, 10, "Anti-AFK hack", offset_flags));
+    }, 11, 10, "Anti-AFK hack", ScanFlags::ModuleInitialized, 0, UINT16_MAX));
 
     // check for hypervisors
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
@@ -806,7 +754,7 @@ void WardenWin::LoadScriptedScans()
     (sizeof(uint8) + sizeof(uint32) + SHA_DIGEST_LENGTH + sizeof(uint8)) * HypervisorCount + 21,
     sizeof(uint8) * HypervisorCount,
     "Hypervisor check",
-    WinAllBuild|InitialLogin));
+    ScanFlags::InitialLogin, 0, UINT16_MAX));
 
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
     // builder
@@ -845,7 +793,7 @@ void WardenWin::LoadScriptedScans()
         return !found;
     }, sizeof(uint8) + sizeof(uint32) + SHA_DIGEST_LENGTH + sizeof(uint32) + sizeof(uint8), sizeof(uint8),
     "Warden Memory Read check",
-    WinAllBuild));
+    ScanFlags::None, 0, UINT16_MAX));
 
     // end scene hook check 1
     static constexpr uint8 endSceneReadSize = 16u;
@@ -885,7 +833,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + endSceneReadSize,
-    "EndScene hook check stage 1", WinAllBuild);
+    "EndScene hook check stage 1", ScanFlags::None, 0, UINT16_MAX);
 
     sWardenScanMgr.AddWindowsScan(endSceneHookCheck1);
 
@@ -927,7 +875,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(uint32),
-    "EndScene locate stage 4", None);
+    "EndScene locate stage 4", ScanFlags::ModuleInitialized, 0, UINT16_MAX);
 
     // end scene locate phase 3
     auto const endSceneLocate3 = std::make_shared<WindowsScan>(
@@ -966,7 +914,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(uint32),
-    "EndScene locate stage 3", None);
+    "EndScene locate stage 3", ScanFlags::ModuleInitialized, 0, UINT16_MAX);
 
     // end scene locate phase 2
     auto const endSceneLocate2 = std::make_shared<WindowsScan>(
@@ -1005,7 +953,7 @@ void WardenWin::LoadScriptedScans()
 
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8), sizeof(uint8) + sizeof(uint32),
-    "EndScene locate stage 2", None);
+    "EndScene locate stage 2", ScanFlags::ModuleInitialized, 0, UINT16_MAX);
 
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
     // builder
@@ -1052,7 +1000,7 @@ void WardenWin::LoadScriptedScans()
     },
     sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8),
     sizeof(uint8) + sizeof(uint32),
-    "EndScene locate stage 1", InitialLogin|offset_flags));
+    "EndScene locate stage 1", ScanFlags::ModuleInitialized | ScanFlags::InitialLogin, 0, UINT16_MAX));
 
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsModuleScan>("prxdrvpe.dll",
     // checker
@@ -1067,7 +1015,7 @@ void WardenWin::LoadScriptedScans()
         }
 
         return false;
-    }), "Proxifier check", WinAllBuild | InitialLogin));
+    }), "Proxifier check", ScanFlags::ModuleInitialized | ScanFlags::InitialLogin, 0, UINT16_MAX));
 
     // click to move enabled check
     sWardenScanMgr.AddWindowsScan(std::make_shared<WindowsScan>(
@@ -1111,7 +1059,7 @@ void WardenWin::LoadScriptedScans()
         return false;
     }, sizeof(uint8) + sizeof(uint8) + sizeof(uint32) + sizeof(uint8),
        sizeof(uint8) + sizeof(float) + sizeof(float) + sizeof(float),
-        "Click To Move Position", WinAllBuild));
+        "Click To Move Position", ScanFlags::ModuleInitialized, 0, UINT16_MAX));
 }
 
 void WardenWin::BuildLuaInit(const std::string &module, bool fastcall, uint32 offset, ByteBuffer &out) const
@@ -1198,7 +1146,7 @@ void WardenWin::BuildTimingInit(const std::string &module, uint32 offset, bool s
 WardenWin::WardenWin(WorldSession *session, const BigNumber &K) :
     _wardenAddress(0), Warden(session, sWardenModuleMgr.GetWindowsModule(), K),
     _lastClientTime(0), _lastHardwareActionTime(0), _lastTimeCheckServer(0), _sysInfoSaved(false),
-    _proxifierFound(false), _hypervisors(""), _endSceneFound(false), _endSceneAddress(0)
+    _proxifierFound(false), _hypervisors(""), _endSceneFound(false), _endSceneAddress(0), _offsetsInitialized(false)
 {
     memset(&_sysInfo, 0, sizeof(_sysInfo));
 }
@@ -1253,68 +1201,18 @@ void WardenWin::ValidateEndScene(const std::vector<uint8> &code)
                 sLog.OutWarden(wardenWin, LOG_LVL_BASIC, "Suspicious EndScene.  Probable bot.");
 
             return false;
-        }, "EndScene hook validate scan", None) });
+        }, "EndScene hook validate scan", ScanFlags::None, 0, UINT16_MAX) });
     }
 }
 
-uint32 WardenWin::GetScanFlags() const
+ScanFlags WardenWin::GetScanFlags() const
 {
-    auto const game_build = m_clientBuild;
+    ScanFlags scanFlags = ScanFlags::Windows;
 
-    constexpr int accepted_versions[] = EXPECTED_MANGOSD_CLIENT_BUILD;
-    // for some reason these arrays are null terminated
-    auto constexpr num_accepted_versions = (sizeof(accepted_versions) / sizeof(accepted_versions[0])) - 1;
+    if (_offsetsInitialized)
+        scanFlags = scanFlags | ScanFlags::ModuleInitialized;
 
-    bool found = false;
-    for (auto i = 0; i < num_accepted_versions; ++i)
-    {
-        if (accepted_versions[i] == game_build)
-        {
-            found = true;
-            break;
-        }
-    }
-
-    if (!found)
-    {
-        sLog.OutWarden(this, LOG_LVL_BASIC, "Invalid client build %u.  Kicking.", m_clientBuild);
-        KickSession();
-        return ScanFlags::None;
-    }
-
-    // at this point we know the game build is accepted
-
-    switch (m_clientBuild)
-    {
-        case 4222:
-            return ScanFlags::WinBuild4222;
-        case 4297:
-            return ScanFlags::WinBuild4297;
-        case 4375:
-            return ScanFlags::WinBuild4375;
-        case 4499:
-            return ScanFlags::WinBuild4449;
-        case 4544:
-            return ScanFlags::WinBuild4544;
-        case 4695:
-            return ScanFlags::WinBuild4695;
-        case 4878:
-            return ScanFlags::WinBuild4878;
-        case 5086:
-            return ScanFlags::WinBuild5086;
-        case 5302:
-            return ScanFlags::WinBuild5302;
-        case 5464:
-            return ScanFlags::WinBuild5464;
-        case 5875:
-            return ScanFlags::WinBuild5875;
-        case 6005:
-            return ScanFlags::WinBuild6005;
-        case 6141:
-            return ScanFlags::WinBuild6141;
-    }
-
-    return ScanFlags::None;
+    return scanFlags;
 }
 
 void WardenWin::InitializeClient()
@@ -1340,8 +1238,10 @@ void WardenWin::InitializeClient()
         pkt.append(timing);
 
         SendPacket(pkt);
-    }
 
+        _offsetsInitialized = true;
+        sLog.OutWarden(this, LOG_LVL_DEBUG, "Initialized module offsets.");
+    }
     _initialized = true;
 }
 
