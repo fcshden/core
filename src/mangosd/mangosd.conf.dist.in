@@ -2958,3 +2958,79 @@ DynamicRespawn.AffectLevelBelow         = 0
 DynamicRespawn.PlayersThreshold         = 0
 DynamicRespawn.PlayersMaxLevelDiff      = 0
 
+###################################################################################################################
+# Custom - Auto add battlebot
+#
+#   BattleBot.AutoAdd.WS.Enable
+#        Enables automatic spawning of battlebots to queue Warsong Gulch
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Alliance.WS.Count
+#        How many alliance battlebots to be spawned for Warsong Gulch
+#        Default: 5
+#   BattleBot.Horde.WS.Count
+#        How many horde battlebots to be spawned for Warsong Gulch
+#        Default: 5
+#
+#   BattleBot.AutoAdd.AB.Enable
+#        Enables automatic spawning of battlebots to queue Arathi Basin
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Alliance.AB.Count
+#        How many alliance battlebots to be spawned for Arathi Basin
+#        Default: 10
+#   BattleBot.Horde.AB.Count
+#        How many horde battlebots to be spawned for Arathi Basin
+#        Default: 10
+#
+#   BattleBot.AutoAdd.AV.Enable
+#        Enables automatic spawning of battlebots to queue Alterac Valley
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Alliance.AV.Count
+#        How many alliance battlebots to be spawned for Alterac Velley
+#        Default: 20
+#   BattleBot.Horde.AV.Count
+#        How many horde battlebots to be spawned for Alterac Velley
+#        Default: 20
+#
+#   BattleBot.Level.Range.1x.Enable
+#        Bot's level will be random 10 to 19
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Level.Range.2x.Enable
+#        Bot's level will be random 20 to 29
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Level.Range.3x.Enable
+#        Bot's level will be random 30 to 39
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Level.Range.4x.Enable
+#        Bot's level will be random 40 to 49
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Level.Range.5x.Enable
+#        Bot's level will be random 50 to 59
+#        Default: 0 - off
+#                 1 - on
+#   BattleBot.Level.Range.60.Enable
+#        Bot's level will be 60 for Warsong and Arathi, 54 to 60 for Alterac Velley
+#        Default: 0 - off
+#                 1 - on
+##################################################################################################################
+BattleBot.AutoAdd.WS.Enable     = 0
+BattleBot.Alliance.WS.Count     = 5
+BattleBot.Horde.WS.Count        = 5
+BattleBot.AutoAdd.AB.Enable     = 0
+BattleBot.Alliance.AB.Count     = 10
+BattleBot.Horde.AB.Count        = 10
+BattleBot.AutoAdd.AV.Enable     = 0
+BattleBot.Alliance.AV.Count     = 20
+BattleBot.Horde.AV.Count        = 20
+BattleBot.Level.Range.1x.Enable = 0
+BattleBot.Level.Range.2x.Enable = 0
+BattleBot.Level.Range.3x.Enable = 0
+BattleBot.Level.Range.4x.Enable = 0
+BattleBot.Level.Range.5x.Enable = 0
+BattleBot.Level.Range.60.Enable = 0
