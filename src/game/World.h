@@ -345,6 +345,12 @@ enum eConfigUInt32Values
     CONFIG_UINT32_PARTY_BOT_MAX_BOTS,
     CONFIG_UINT32_PARTY_BOT_AUTO_EQUIP,
     CONFIG_UINT32_BATTLE_BOT_AUTO_EQUIP,
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_ALLIANCE, // counts of alliance battlebots for warsong
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_HORDE, // counts of horde battlebots for warsong
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_ALLIANCE, // counts of alliance battlebots for arathi
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_HORDE, // counts of horde battlebots for arathi
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_ALLIANCE, // counts of alliance battlebots for alterac
+    CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_HORDE, // counts of horde battlebots for alterac
     CONFIG_UINT32_PARTY_BOT_RANDOM_GEAR_LEVEL_DIFFERENCE,
     CONFIG_UINT32_PVP_POOL_SIZE_PER_FACTION,
     //Start Solocraft Defines
@@ -686,6 +692,15 @@ enum eConfigBoolValues
     CONFIG_BOOL_VISIBILITY_FORCE_ACTIVE_OBJECTS,
     CONFIG_BOOL_PLAYER_BOT_SHOW_IN_WHO_LIST,
     CONFIG_BOOL_PARTY_BOT_SKIP_CHECKS,
+    CONFIG_BOOL_AUTO_ADD_BATTLEBOT_WS, // auto add battlebot Warsong Gulch
+    CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AB, // auto add battlebot Arathi Basin
+    CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AV, // auto add battlebot Alterac Valley
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_1X, // enable add battlebot level 10~19
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X, // enable add battlebot level 20~29
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X, // enable add battlebot level 30~39
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X, // enable add battlebot level 40~49
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X, // enable add battlebot level 50~59
+    CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60, // enable add battlebot level 60
     CONFIG_BOOL_WORLD_AVAILABLE,
     CONFIG_BOOL_GM_CHEAT_GOD,
     CONFIG_BOOL_LFG_MATCHMAKING,

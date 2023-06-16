@@ -89,6 +89,12 @@ class PlayerBotMgr
         void DeleteAll();
         void AddAllBots();
 
+        //bool AutoAddBattleBot(int args, uint8 bg, uint32 botLevel);
+        bool AutoAddBattleBot(char* args, uint8 bg, uint32 botLevel);
+        //bool AutoAddBattleBotWS();
+        //bool AutoAddBattleBotAB();
+        //bool AutoAddBattleBotAV();
+
         void OnBotLogout(PlayerBotEntry *e);
         void OnBotLogin(PlayerBotEntry *e);
         void OnPlayerInWorld(Player* pPlayer);

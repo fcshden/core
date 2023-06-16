@@ -133,6 +133,106 @@ void PlayerBotMgr::Load()
     m_stats.confRandomBotsRefresh = m_confRandomBotsRefresh;
     m_stats.confUpdateDiff = m_confUpdateDiff;
 
+    sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] Auto add BattleBots ...");
+    if (sWorld.getConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_WS))
+    {
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_ALLIANCE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_ALLIANCE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_1X))
+                    AutoAddBattleBot("alliance", 2, 10);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X))
+                    AutoAddBattleBot("alliance", 2, 20);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X))
+                    AutoAddBattleBot("alliance", 2, 30);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X))
+                    AutoAddBattleBot("alliance", 2, 40);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X))
+                    AutoAddBattleBot("alliance", 2, 50);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("alliance", 2, 60);
+            }
+        }
+
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_HORDE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_HORDE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_1X))
+                    AutoAddBattleBot("horde", 2, 10);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X))
+                    AutoAddBattleBot("horde", 2, 20);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X))
+                    AutoAddBattleBot("horde", 2, 30);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X))
+                    AutoAddBattleBot("horde", 2, 40);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X))
+                    AutoAddBattleBot("horde", 2, 50);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("horde", 2, 60);
+            }
+        }
+    }
+    else
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] disable loading Warsong BattleBots ...");
+
+    if (sWorld.getConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AB))
+    {
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_ALLIANCE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_ALLIANCE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X))
+                    AutoAddBattleBot("alliance", 3, 20);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X))
+                    AutoAddBattleBot("alliance", 3, 30);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X))
+                    AutoAddBattleBot("alliance", 3, 40);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X))
+                    AutoAddBattleBot("alliance", 3, 50);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("alliance", 3, 60);
+            }
+        }
+
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_HORDE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_HORDE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X))
+                    AutoAddBattleBot("horde", 3, 20);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X))
+                    AutoAddBattleBot("horde", 3, 30);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X))
+                    AutoAddBattleBot("horde", 3, 40);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X))
+                    AutoAddBattleBot("horde", 3, 50);
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("horde", 3, 60);
+            }
+        }
+    }
+    else
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] disable loading Arathi BattleBots ...");
+
+    if (sWorld.getConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AV))
+    {
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_ALLIANCE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_ALLIANCE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("alliance", 1, 61);
+            }
+        }
+
+        if (sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_HORDE) > 0)
+        {
+            for (int i = 0; i < sWorld.getConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_HORDE); i++) {
+                if (sWorld.getConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60))
+                    AutoAddBattleBot("horde", 1, 61);
+            }
+        }
+    }
+    else 
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] disable loading Alterac BattleBots ...");
+
     // 8- Show stats if debug
     if (m_confDebug)
     {
@@ -1688,6 +1788,66 @@ bool ChatHandler::HandleBattleBotAddCommand(char* args, uint8 bg)
     
     if (bg == BATTLEGROUND_QUEUE_AV)
         PSendSysMessage("Added %s battle bot and queuing for AV", option.c_str());
+
+    return true;
+}
+
+bool PlayerBotMgr::AutoAddBattleBot(char* args, uint8 bg, uint32 botLevel) //輸入3個參數：args陣營名稱、bg戰場ID、機器人等級
+{
+    Team botTeam = HORDE;
+    std::string option; //將第一個傳入參數標準化為字串，名稱option
+    option = args;
+    if (option == "horde")
+        botTeam = HORDE;
+    else if (option == "alliance")
+        botTeam = ALLIANCE;
+
+    if (botLevel == 10)
+        botLevel = urand(10, 19);
+    if (botLevel == 20)
+        botLevel = urand(20, 29);
+    if (botLevel == 30)
+        botLevel = urand(30, 39);
+    if (botLevel == 40)
+        botLevel = urand(40, 49);
+    if (botLevel == 50)
+        botLevel = urand(50, 59);
+    if (botLevel == 61)
+        botLevel = urand(54, 60); // this is for Alterac Valley
+
+    std::vector<uint32> dpsClasses = { CLASS_WARRIOR, CLASS_HUNTER, CLASS_ROGUE, CLASS_MAGE, CLASS_WARLOCK, CLASS_PRIEST, CLASS_DRUID };
+    if (botTeam == HORDE)
+        dpsClasses.push_back(CLASS_SHAMAN);
+    else
+        dpsClasses.push_back(CLASS_PALADIN);
+    uint8 botClass = SelectRandomContainerElement(dpsClasses);
+    uint8 botRace = SelectRandomRaceForClass(botClass, botTeam);
+    
+    // Spawn bot on GM Island
+    uint32 const instanceId = sMapMgr.GetContinentInstanceId(1, 16224.356f, 16284.763f);
+    //BattleBotAI* ai = new BattleBotAI(botRace, botClass, botLevel, 1, instanceId, 16224.356f, 16284.763f, 13.175f, 4.56f, bg);
+
+    if (botTeam == ALLIANCE)
+    {
+        // Spawn alliance battlebot on GM Island
+        BattleBotAI* ai = new BattleBotAI(botRace, botClass, botLevel, 1, 0, 16224.356f, 16284.763f, 13.175f, 4.56f, bg);
+        sPlayerBotMgr.AddBot(ai);
+    }
+    if (botTeam == HORDE)
+    {
+        // Spawn horde battlebot on GM Island
+        BattleBotAI* ai = new BattleBotAI(botRace, botClass, botLevel, 1, 0, 16227.326f, 16284.652f, 13.175f, 4.56f, bg);
+        sPlayerBotMgr.AddBot(ai);
+    }
+
+    if (bg == BATTLEGROUND_QUEUE_WS)
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] Added level %d %s battle bot and queuing for WS", botLevel, option.c_str());
+
+    if (bg == BATTLEGROUND_QUEUE_AB)
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] Added level %d %s battle bot and queuing for AB", botLevel, option.c_str());
+
+    if (bg == BATTLEGROUND_QUEUE_AV)
+        sLog.Out(LOG_BASIC, LOG_LVL_MINIMAL, ">> [PlayerBotMgr] Added level %d %s battle bot and queuing for AV", botLevel, option.c_str());
 
     return true;
 }
