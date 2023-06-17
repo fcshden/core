@@ -960,6 +960,21 @@ void World::LoadConfigSettings(bool reload)
     setConfigMinMax(CONFIG_UINT32_PARTY_BOT_AUTO_EQUIP, "PartyBot.AutoEquip", PLAYER_BOT_AUTO_EQUIP_RANDOM_GEAR, PLAYER_BOT_AUTO_EQUIP_STARTING_GEAR, PLAYER_BOT_AUTO_EQUIP_PREMADE_GEAR);
     setConfigMinMax(CONFIG_UINT32_BATTLE_BOT_AUTO_EQUIP, "BattleBot.AutoEquip", PLAYER_BOT_AUTO_EQUIP_RANDOM_GEAR, PLAYER_BOT_AUTO_EQUIP_STARTING_GEAR, PLAYER_BOT_AUTO_EQUIP_PREMADE_GEAR);
     setConfig(CONFIG_UINT32_PARTY_BOT_RANDOM_GEAR_LEVEL_DIFFERENCE, "PartyBot.RandomGearLevelDifference", 10);
+    setConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_WS, "BattleBot.AutoAdd.WS.Enable", false); // auto add battlebot Warsong Gulch
+    setConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AB, "BattleBot.AutoAdd.AB.Enable", false); // auto add battlebot Arathi Basin
+    setConfig(CONFIG_BOOL_AUTO_ADD_BATTLEBOT_AV, "BattleBot.AutoAdd.AV.Enable", false); // auto add battlebot Alterac Valley
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_ALLIANCE, "BattleBot.Alliance.WS.Count", 0); // counts of alliance battlebots for warsong
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_WS_HORDE, "BattleBot.Horde.WS.Count", 0); // counts of horde battlebots for warsong
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_ALLIANCE, "BattleBot.Alliance.AB.Count", 0); // counts of alliance battlebots for arathi
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AB_HORDE, "BattleBot.Horde.AB.Count", 0); // counts of horde battlebots for arathi
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_ALLIANCE, "BattleBot.Alliance.AV.Count", 0); // counts of alliance battlebots for alterac
+    setConfig(CONFIG_UINT32_BATTLE_BOT_AUTO_ADD_AV_HORDE, "BattleBot.Horde.AV.Count", 0); // counts of horde battlebots for alterac
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_1X, "BattleBot.Level.Range.1x.Enable", false); // auto add battlebot level range 10-19
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_2X, "BattleBot.Level.Range.2x.Enable", false); // auto add battlebot level range 10-19
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_3X, "BattleBot.Level.Range.3x.Enable", false); // auto add battlebot level range 10-19
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X, "BattleBot.Level.Range.4x.Enable", false); // auto add battlebot level range 10-19
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X, "BattleBot.Level.Range.5x.Enable", false); // auto add battlebot level range 10-19
+    setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60, "BattleBot.Level.Range.60.Enable", false); // auto add battlebot level 60
 
     setConfigMinMax(CONFIG_UINT32_SPELL_EFFECT_DELAY, "Spell.EffectDelay", 400, 0, 1000);
     setConfigMinMax(CONFIG_UINT32_SPELL_PROC_DELAY, "Spell.ProcDelay", 400, 0, 1000);
