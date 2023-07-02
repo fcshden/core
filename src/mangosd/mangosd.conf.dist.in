@@ -2905,6 +2905,10 @@ AHBot.itemcount = 50
 #        A lower number equals to gear being more close to the bot level.
 #        Default: 10 (bots will equip gear down to a minimum of 10 item level difference)
 #
+#    Worldbuff.Partybot.Enable
+#        Apply world buff on partybot.
+#        Default: 0 (Disable)
+#
 #    BattleBot.AutoEquip
 #        What gear will new battlebots spawn with.
 #        Default: 1 (random items)
@@ -2926,6 +2930,8 @@ PartyBot.MaxBots = 0
 PartyBot.SkipChecks = 0
 PartyBot.AutoEquip = 1
 PartyBot.RandomGearLevelDifference = 10
+
+Worldbuff.Partybot.Enable = 0
 
 BattleBot.AutoEquip = 1
 

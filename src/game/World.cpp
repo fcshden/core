@@ -975,6 +975,7 @@ void World::LoadConfigSettings(bool reload)
     setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X, "BattleBot.Level.Range.4x.Enable", false); // auto add battlebot level range 10-19
     setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X, "BattleBot.Level.Range.5x.Enable", false); // auto add battlebot level range 10-19
     setConfig(CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60, "BattleBot.Level.Range.60.Enable", false); // auto add battlebot level 60
+    setConfig(CONFIG_BOOT_WORLDBUFF_PARTYBOT, "Worldbuff.Partybot.Enable", false); // apply world buff on partybot
 
     setConfigMinMax(CONFIG_UINT32_SPELL_EFFECT_DELAY, "Spell.EffectDelay", 400, 0, 1000);
     setConfigMinMax(CONFIG_UINT32_SPELL_PROC_DELAY, "Spell.ProcDelay", 400, 0, 1000);

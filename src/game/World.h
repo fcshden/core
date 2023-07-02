@@ -701,6 +701,7 @@ enum eConfigBoolValues
     CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_4X, // enable add battlebot level 40~49
     CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_5X, // enable add battlebot level 50~59
     CONFIG_BOOL_BATTLE_BOT_LEVEL_RANGE_60, // enable add battlebot level 60
+    CONFIG_BOOT_WORLDBUFF_PARTYBOT, // apply world buff on partybot
     CONFIG_BOOL_WORLD_AVAILABLE,
     CONFIG_BOOL_GM_CHEAT_GOD,
     CONFIG_BOOL_LFG_MATCHMAKING,

@@ -545,6 +545,45 @@ void PartyBotAI::UpdateAI(uint32 const diff)
         me->SetHealthPercent(100.0f);
         me->SetPowerPercent(me->GetPowerType(), 100.0f);
 
+        // Apply raid buffs
+        if (sWorld.getConfig(CONFIG_BOOT_WORLDBUFF_PARTYBOT))
+        {
+            if (me->GetLevel() == 60)
+            {
+                me->AddAura(22888, 0, nullptr); //Dragonslayer
+                me->AddAura(16609, 0, nullptr); //Warcheifs blessing
+                me->AddAura(15366, 0, nullptr); //Songflower Serenade
+                me->AddAura(10692, 0, nullptr); //Cerebral Cortex Compound
+                me->AddAura(22820, 0, nullptr); //Slip'kik's Savvy
+                me->AddAura(22817, 0, nullptr); //Fengus' Ferocity
+                me->AddAura(22818, 0, nullptr); //Mol'dar's Moxie
+                me->AddAura(10667, 0, nullptr); //Rage of Ages (ROIDS)
+
+                me->AddAura(17537, 0, nullptr); //Elixir of Brute Force
+                me->AddAura(17538, 0, nullptr); //Elixir of the Mongoose
+
+                me->AddAura(17546, 0, nullptr); //Nature Protection
+                me->AddAura(17544, 0, nullptr); //Frost Protection
+                me->AddAura(17543, 0, nullptr); //Fire Protection
+                me->AddAura(17548, 0, nullptr); //Shadow Protection
+
+                me->AddAura(23736, 0, nullptr); //Sayge's Dark Fortune of Agility
+                me->AddAura(23767, 0, nullptr); //Sayge's Dark Fortune of Armor
+                me->AddAura(23768, 0, nullptr); //Sayge's Dark Fortune of Damage
+                me->AddAura(23766, 0, nullptr); //Sayge's Dark Fortune of Intelligence
+                me->AddAura(23769, 0, nullptr); //Sayge's Dark Fortune of Resistance
+                me->AddAura(23738, 0, nullptr); //Sayge's Dark Fortune of Spirit
+                me->AddAura(23737, 0, nullptr); //Sayge's Dark Fortune of Stamina
+                me->AddAura(23735, 0, nullptr); //Sayge's Dark Fortune of Strength
+            }
+            else // Buffs available before 60
+            {
+                me->AddAura(22888, 0, nullptr); //Dragonslayer
+                me->AddAura(16609, 0, nullptr); //Warcheifs blessing
+                me->AddAura(15366, 0, nullptr); //Songflower Serenade
+            }
+        }
+
         uint32 newzone, newarea;
         me->GetZoneAndAreaId(newzone, newarea);
         me->UpdateZone(newzone, newarea);
@@ -787,6 +826,45 @@ void PartyBotAI::UpdateOutOfCombatAI()
             if (CanTryToCastSpell(pTarget, m_resurrectionSpell))
                 if (DoCastSpell(pTarget, m_resurrectionSpell) == SPELL_CAST_OK)
                     return;
+
+    // Apply raid buffs
+    if (sWorld.getConfig(CONFIG_BOOT_WORLDBUFF_PARTYBOT))
+    {
+        if (me->GetLevel() == 60)
+        {
+            me->AddAura(22888, 0, nullptr); //Dragonslayer
+            me->AddAura(16609, 0, nullptr); //Warcheifs blessing
+            me->AddAura(15366, 0, nullptr); //Songflower Serenade
+            me->AddAura(10692, 0, nullptr); //Cerebral Cortex Compound
+            me->AddAura(22820, 0, nullptr); //Slip'kik's Savvy
+            me->AddAura(22817, 0, nullptr); //Fengus' Ferocity
+            me->AddAura(22818, 0, nullptr); //Mol'dar's Moxie
+            me->AddAura(10667, 0, nullptr); //Rage of Ages (ROIDS)
+
+            me->AddAura(17537, 0, nullptr); //Elixir of Brute Force
+            me->AddAura(17538, 0, nullptr); //Elixir of the Mongoose
+
+            me->AddAura(17546, 0, nullptr); //Nature Protection
+            me->AddAura(17544, 0, nullptr); //Frost Protection
+            me->AddAura(17543, 0, nullptr); //Fire Protection
+            me->AddAura(17548, 0, nullptr); //Shadow Protection
+
+            me->AddAura(23736, 0, nullptr); //Sayge's Dark Fortune of Agility
+            me->AddAura(23767, 0, nullptr); //Sayge's Dark Fortune of Armor
+            me->AddAura(23768, 0, nullptr); //Sayge's Dark Fortune of Damage
+            me->AddAura(23766, 0, nullptr); //Sayge's Dark Fortune of Intelligence
+            me->AddAura(23769, 0, nullptr); //Sayge's Dark Fortune of Resistance
+            me->AddAura(23738, 0, nullptr); //Sayge's Dark Fortune of Spirit
+            me->AddAura(23737, 0, nullptr); //Sayge's Dark Fortune of Stamina
+            me->AddAura(23735, 0, nullptr); //Sayge's Dark Fortune of Strength
+        }
+        else // Buffs available before 60
+        {
+            me->AddAura(22888, 0, nullptr); //Dragonslayer
+            me->AddAura(16609, 0, nullptr); //Warcheifs blessing
+            me->AddAura(15366, 0, nullptr); //Songflower Serenade
+        }
+    }
 
     if (m_role != ROLE_TANK && me->GetVictim() && CrowdControlMarkedTargets())
         return;
